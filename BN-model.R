@@ -38,14 +38,14 @@ ipak(packages)
 # DEFINING THE BN STRUCTURE 
 
 # Read network nodes and connection
-nodes_t<-read.table("Model Structure/Node_CR-ERA-mini.csv", header=FALSE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+nodes_t<-read.table("Model-Structure/Node_CR-ERA.csv", header=FALSE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 nodes2<-as.matrix(nodes_t[,1])
 states<-nodes_t[,2:6]
 colnames(states)<-NULL
 
 # Import network connections as matrix
 
-data2<- read.table("Model Structure/Edge_CR-ERA-mini.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE) #read edges
+data2<- read.table("Model-Structure/Edge_CR-ERA.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE) #read edges
 arc.set =as.matrix(data2)
 dagCR<-empty.graph(nodes2) # create empty DAG with nodes in the data
 arcs(dagCR) = arc.set # create DAG
@@ -174,192 +174,192 @@ Mp<-array(c(0,1, 1,0,1,0), dim=c(2,3), dimnames=list(Mined = Mined, Distance_min
 NRp<-array(c(1,0, 0,1), dim=c(2,2), dimnames=list(Nodule_removal= NRem, Mined=Mined)) #Nodule removal y/n
 
 # Volume extraction
-VEp <-read.csv("CPTs/Final CPTs/Volume_extraction.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+VEp <-read.csv("CPTs/Volume_extraction.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 VEp<-as.matrix(VEp[,3:5])
 colnames(VEp) <- NULL
 VE.pr<-array(t(VEp),dim=c(3,3,3),dimnames = list(Volume_extraction=VE,Depth_extraction=DE,Mining_intensity=MI)) 
 
 # Sediment contaminants
-SCp <-read.csv("CPTs/Final CPTs/Sediment_contaminants.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+SCp <-read.csv("CPTs/Sediment_contaminants.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 SCp<-as.matrix(SCp[,2:4])
 colnames(SCp) <- NULL
 SC.pr<-array(t(SCp),dim=c(3,3),dimnames = list(Sediment_contaminants=SC,Sediment_Type=ST))   #Sediment contaminants
 
 # Suspended sediment 
-SSed<-read.csv("CPTs/Final CPTs/Suspended_sediment-v2.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+SSed<-read.csv("CPTs/Suspended_sediment-v2.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 SSed<-as.matrix(SSed[,5:7])
 colnames(SSed) <- NULL
 SS.pr<-array(t(SSed),dim=c(3,3,2,3,3),dimnames = list(Suspended_sediment=SS, Volume_extraction=VE, Plume_release=PR, Sediment_type=ST, Distance_mining_site=DistMS)) 
 
 # Sediment deposition
-SDepp<-read.csv("CPTs/Final CPTs/Sediment_deposition-v2.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+SDepp<-read.csv("CPTs/Sediment_deposition-v2.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 SDepp<-as.matrix(SDepp[,5:7])
 colnames(SDepp) <- NULL
 SD.pr<-array(t(SDepp),dim=c(3,3,2,3,3),dimnames = list(Sediment_deposition=SDep,Suspended_sediment = SS, Plume_release=PR, Sediment_type=ST, Distance_mining_site=DistMS)) 
 
 # Contaminant release
 
-CRelp<-read.csv("CPTs/Final CPTs/Contaminant_release.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+CRelp<-read.csv("CPTs/Contaminant_release.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 CRelp<-as.matrix(CRelp[,5:6])
 colnames(CRelp) <- NULL
 CRel.pr<-array(t(CRelp),dim=c(2,3,3,3,3),dimnames = list(Contaminant_release = CRel, Sediment_contaminants=SC,Volume_extraction = VE, Sediment_type=ST,Distance_mining_site=DistMS )) 
 
 # Sediment changes
 
-SChp<-read.csv("CPTs/Final CPTs/Sediment_changes.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+SChp<-read.csv("CPTs/Sediment_changes.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 SChp<-as.matrix(SChp[,5:6])
 colnames(SChp) <- NULL
 SCh.pr<-array(t(SChp),dim=c(2,3,2,3,3),dimnames = list(Sediment_changes=SChan,Depth_extraction=DE, Nodule_removal=NRem, Mining_intensity=MI, Sediment_deposition=SDep)) 
 
 #Read CPTs for faunal groups
 
-SSI_dir.p<-read.csv("CPTs/Final CPTs/SSI_dir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+SSI_dir.p<-read.csv("CPTs/SSI_dir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 SSI_dir.p<-as.matrix(SSI_dir.p[,3:7])
 colnames(SSI_dir.p) <- NULL
 SSI_dir.pr<-array(t(SSI_dir.p),dim=c(5,3,2),dimnames = list(SSI_dir=SSI_dir, Mining_intensity=MI, Mined=Mined)) 
 
-SSI_indir.p<-read.csv("CPTs/Final CPTs/SSI_indir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+SSI_indir.p<-read.csv("CPTs/SSI_indir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 SSI_indir.p<-as.matrix(SSI_indir.p[,4:8])
 colnames(SSI_indir.p) <- NULL
 SSI_indir.pr<-array(t(SSI_indir.p),dim=c(5,2,3,3),dimnames = list(SSI_indir=SSI_indir, Contaminant_release=CRel,Sediment_deposition=SDep, Suspended_sediment=SS)) 
 
-SSI_t2.p<-read.csv("CPTs/Final CPTs/TotalMortality.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+SSI_t2.p<-read.csv("CPTs/TotalMortality.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 SSI_t2.p<-as.matrix(SSI_t2.p[,3:7])
 colnames(SSI_t2.p) <- NULL
 SSI_t2.pr<-array(t(SSI_t2.p),dim=c(5,5,5),dimnames = list(SSI_t2=SSI_indir, SSI_dir=SSI_dir, SSI_indir=SSI_indir))
 
-SSI_t3.p<-read.csv("CPTs/Final CPTs/SSI_t3.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+SSI_t3.p<-read.csv("CPTs/SSI_t3.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 SSI_t3.p<-as.matrix(SSI_t3.p[,3:7])
 colnames(SSI_t3.p) <- NULL
 SSI_t3.pr<-array(t(SSI_t3.p),dim=c(5,2,5),dimnames = list(SSI_t3=SSI_t3, Sediment_changes=SChan, SSI_t2=SSI_t2))
 
 # Small mobile infauna SMI
 
-SMI_dir.p<-read.csv("CPTs/Final CPTs/SSI_dir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+SMI_dir.p<-read.csv("CPTs/SSI_dir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 SMI_dir.p<-as.matrix(SMI_dir.p[,3:7])
 colnames(SMI_dir.p) <- NULL
 SMI_dir.pr<-array(t(SMI_dir.p),dim=c(5,3,2),dimnames = list(SMI_dir=SMI_dir, Mining_intensity=MI,Mined=Mined)) 
 
-SMI_indir.p<-read.csv("CPTs/Final CPTs/SMI_indir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+SMI_indir.p<-read.csv("CPTs/SMI_indir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 SMI_indir.p<-as.matrix(SMI_indir.p[,4:8])
 colnames(SMI_indir.p) <- NULL
 SMI_indir.pr<-array(t(SMI_indir.p),dim=c(5,2,3,3),dimnames = list(SMI_indir=SMI_indir, Contaminant_release=CRel,Sediment_deposition=SDep, Suspended_sediment=SS)) 
 
-SMI_t2.p<-read.csv("CPTs/Final CPTs/TotalMortality.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+SMI_t2.p<-read.csv("CPTs/TotalMortality.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 SMI_t2.p<-as.matrix(SMI_t2.p[,3:7])
 colnames(SMI_t2.p) <- NULL
 SMI_t2.pr<-array(t(SMI_t2.p),dim=c(5,5,5),dimnames = list(SMI_t2=SMI_indir, SMI_dir=SMI_dir, SMI_indir=SMI_indir))
 
-SMI_t3.p<-read.csv("CPTs/Final CPTs/SMI_t3.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+SMI_t3.p<-read.csv("CPTs/SMI_t3.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 SMI_t3.p<-as.matrix(SMI_t3.p[,3:7])
 colnames(SMI_t3.p) <- NULL
 SMI_t3.pr<-array(t(SMI_t3.p),dim=c(5,2,5),dimnames = list(SMI_t3=SMI_t3, Sediment_changes=SChan, SMI_t2=SMI_t2))
 
 # Surface meiofauna
 
-SM_dir.p<-read.csv("CPTs/Final CPTs/SSI_dir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+SM_dir.p<-read.csv("CPTs/SSI_dir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 SM_dir.p<-as.matrix(SM_dir.p[,3:7])
 colnames(SM_dir.p) <- NULL
 SM_dir.pr<-array(t(SM_dir.p),dim=c(5,3,2),dimnames = list(SM_dir=SM_dir, Mining_intensity=MI,Mined=Mined)) 
 
-SM_indir.p<-read.csv("CPTs/Final CPTs/SM_indir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+SM_indir.p<-read.csv("CPTs/SM_indir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 SM_indir.p<-as.matrix(SM_indir.p[,4:8])
 colnames(SM_indir.p) <- NULL
 SM_indir.pr<-array(t(SM_indir.p),dim=c(5,2,3,3),dimnames = list(SM_indir=SM_indir, Contaminant_release=CRel,Sediment_deposition=SDep, Suspended_sediment=SS)) 
 
-SM_t2.p<-read.csv("CPTs/Final CPTs/TotalMortality.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+SM_t2.p<-read.csv("CPTs/TotalMortality.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 SM_t2.p<-as.matrix(SM_t2.p[,3:7])
 colnames(SM_t2.p) <- NULL
 SM_t2.pr<-array(t(SM_t2.p),dim=c(5,5,5),dimnames = list(SM_t2=SM_indir, SM_dir=SM_dir, SM_indir=SM_indir))
 
-SM_t3.p<-read.csv("CPTs/Final CPTs/SM_t3.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+SM_t3.p<-read.csv("CPTs/SM_t3.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 SM_t3.p<-as.matrix(SM_t3.p[,3:7])
 colnames(SM_t3.p) <- NULL
 SM_t3.pr<-array(t(SM_t3.p),dim=c(5,2,5),dimnames = list(SM_t3=SM_t3, Sediment_changes=SChan, SM_t2=SM_t2))
 
 # Deep meiofauna
 
-DM_dir.p<-read.csv("CPTs/Final CPTs/SSI_dir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+DM_dir.p<-read.csv("CPTs/SSI_dir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 DM_dir.p<-as.matrix(DM_dir.p[,3:7])
 colnames(DM_dir.p) <- NULL
 DM_dir.pr<-array(t(DM_dir.p),dim=c(5,3,2),dimnames = list(DM_dir=DM_dir, Mining_intensity=MI,Mined=Mined)) 
 
-DM_indir.p<-read.csv("CPTs/Final CPTs/DM_indir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+DM_indir.p<-read.csv("CPTs/DM_indir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 DM_indir.p<-as.matrix(DM_indir.p[,4:8])
 colnames(DM_indir.p) <- NULL
 DM_indir.pr<-array(t(DM_indir.p),dim=c(5,2,3,3),dimnames = list(DM_indir=DM_indir, Contaminant_release=CRel,Sediment_deposition=SDep, Suspended_sediment=SS)) 
 
-DM_t2.p<-read.csv("CPTs/Final CPTs/TotalMortality.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+DM_t2.p<-read.csv("CPTs/TotalMortality.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 DM_t2.p<-as.matrix(DM_t2.p[,3:7])
 colnames(DM_t2.p) <- NULL
 DM_t2.pr<-array(t(DM_t2.p),dim=c(5,5,5),dimnames = list(DM_t2=DM_indir, DM_dir=DM_dir, DM_indir=DM_indir))
 
-DM_t3.p<-read.csv("CPTs/Final CPTs/DM_t3.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+DM_t3.p<-read.csv("CPTs/DM_t3.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 DM_t3.p<-as.matrix(DM_t3.p[,3:7])
 colnames(DM_t3.p) <- NULL
 DM_t3.pr<-array(t(DM_t3.p),dim=c(5,2,5),dimnames = list(DM_t3=DM_t3, Sediment_changes=SChan, DM_t2=DM_t2))
 
 # Large mobile macrofauna
-LMM_dir.p<-read.csv("CPTs/Final CPTs/SSI_dir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+LMM_dir.p<-read.csv("CPTs/SSI_dir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 LMM_dir.p<-as.matrix(LMM_dir.p[,3:7])
 colnames(LMM_dir.p) <- NULL
 LMM_dir.pr<-array(t(LMM_dir.p),dim=c(5,3,2),dimnames = list(LMM_dir=LMM_dir, Mining_intensity=MI,Mined=Mined)) 
 
-LMM_indir.p<-read.csv("CPTs/Final CPTs/LMM_indir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+LMM_indir.p<-read.csv("CPTs/LMM_indir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 LMM_indir.p<-as.matrix(LMM_indir.p[,4:8])
 colnames(LMM_indir.p) <- NULL
 LMM_indir.pr<-array(t(LMM_indir.p),dim=c(5,2,3,3),dimnames = list(LMM_indir=LMM_indir, Contaminant_release=CRel,Sediment_deposition=SDep, Suspended_sediment=SS)) 
 
-LMM_t2.p<-read.csv("CPTs/Final CPTs/TotalMortality.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+LMM_t2.p<-read.csv("CPTs/TotalMortality.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 LMM_t2.p<-as.matrix(LMM_t2.p[,3:7])
 colnames(LMM_t2.p) <- NULL
 LMM_t2.pr<-array(t(LMM_t2.p),dim=c(5,5,5),dimnames = list(LMM_t2=LMM_indir, LMM_dir=LMM_dir, LMM_indir=LMM_indir))
 
-LMM_t3.p<-read.csv("CPTs/Final CPTs/LMM_t3.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+LMM_t3.p<-read.csv("CPTs/LMM_t3.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 LMM_t3.p<-as.matrix(LMM_t3.p[,3:7])
 colnames(LMM_t3.p) <- NULL
 LMM_t3.pr<-array(t(LMM_t3.p),dim=c(5,2,5),dimnames = list(LMM_t3=LMM_t3, Sediment_changes=SChan, LMM_t2=LMM_t2))
 
 # Large sessile infauna
 
-LSI_dir.p<-read.csv("CPTs/Final CPTs/SSI_dir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+LSI_dir.p<-read.csv("CPTs/SSI_dir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 LSI_dir.p<-as.matrix(LSI_dir.p[,3:7])
 colnames(LSI_dir.p) <- NULL
 LSI_dir.pr<-array(t(LSI_dir.p),dim=c(5,3,2),dimnames = list(LSI_dir=LSI_dir, Mining_intensity=MI,Mined=Mined)) 
 
-LSI_indir.p<-read.csv("CPTs/Final CPTs/LSI_indir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+LSI_indir.p<-read.csv("CPTs/LSI_indir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 LSI_indir.p<-as.matrix(LSI_indir.p[,4:8])
 colnames(LSI_indir.p) <- NULL
 LSI_indir.pr<-array(t(LSI_indir.p),dim=c(5,2,3,3),dimnames = list(LSI_indir=LSI_indir, Contaminant_release=CRel,Sediment_deposition=SDep, Suspended_sediment=SS)) 
 
-LSI_t2.p<-read.csv("CPTs/Final CPTs/TotalMortality.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+LSI_t2.p<-read.csv("CPTs/TotalMortality.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 LSI_t2.p<-as.matrix(LSI_t2.p[,3:7])
 colnames(LSI_t2.p) <- NULL
 LSI_t2.pr<-array(t(LSI_t2.p),dim=c(5,5,5),dimnames = list(LSI_t2=LSI_indir, LSI_dir=LSI_dir, LSI_indir=LSI_indir))
 
-LSI_t3.p<-read.csv("CPTs/Final CPTs/LSI_t3.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+LSI_t3.p<-read.csv("CPTs/LSI_t3.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 LSI_t3.p<-as.matrix(LSI_t3.p[,3:7])
 colnames(LSI_t3.p) <- NULL
 LSI_t3.pr<-array(t(LSI_t3.p),dim=c(5,2,5),dimnames = list(LSI_t3=LSI_t3, Sediment_changes=SChan, LSI_t2=LSI_t2))
 
 # Sessile soft-bodied megafauna
 
-SSBM_dir.p<-read.csv("CPTs/Final CPTs/SESF_dir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+SSBM_dir.p<-read.csv("CPTs/SESF_dir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 SSBM_dir.p<-as.matrix(SSBM_dir.p[,3:7])
 colnames(SSBM_dir.p) <- NULL
 SSBM_dir.pr<-array(t(SSBM_dir.p),dim=c(5,3,2),dimnames = list(SSBM_dir=SSBM_dir, Mining_intensity=MI,Mined=Mined)) 
 
-SSBM_indir.p<-read.csv("CPTs/Final CPTs/SSBM_indir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+SSBM_indir.p<-read.csv("CPTs/SSBM_indir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 SSBM_indir.p<-as.matrix(SSBM_indir.p[,4:8])
 colnames(SSBM_indir.p) <- NULL
 SSBM_indir.pr<-array(t(SSBM_indir.p),dim=c(5,2,3,3),dimnames = list(SSBM_indir=SSBM_indir, Contaminant_release=CRel,Sediment_deposition=SDep, Suspended_sediment=SS)) 
 
-SSBM_t2.p<-read.csv("CPTs/Final CPTs/TotalMortality.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+SSBM_t2.p<-read.csv("CPTs/TotalMortality.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 SSBM_t2.p<-as.matrix(SSBM_t2.p[,3:7])
 colnames(SSBM_t2.p) <- NULL
 SSBM_t2.pr<-array(t(SSBM_t2.p),dim=c(5,5,5),dimnames = list(SSBM_t2=SSBM_indir, SSBM_dir=SSBM_dir, SSBM_indir=SSBM_indir))
 
-SSBM_t3.p<-read.csv("CPTs/Final CPTs/SSBM_t3.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+SSBM_t3.p<-read.csv("CPTs/SSBM_t3.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 SSBM_t3.p<-as.matrix(SSBM_t3.p[,3:7])
 colnames(SSBM_t3.p) <- NULL
 SSBM_t3.pr<-array(t(SSBM_t3.p),dim=c(5,2,5),dimnames = list(SSBM_t3=SSBM_t3, Sediment_changes=SChan, SSBM_t2=SSBM_t2))
@@ -367,176 +367,176 @@ SSBM_t3.pr<-array(t(SSBM_t3.p),dim=c(5,2,5),dimnames = list(SSBM_t3=SSBM_t3, Sed
 
 # Mobile predatory epifauna
 
-MPE_dir.p<-read.csv("CPTs/Final CPTs/GH_dir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+MPE_dir.p<-read.csv("CPTs/GH_dir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 MPE_dir.p<-as.matrix(MPE_dir.p[,3:7])
 colnames(MPE_dir.p) <- NULL
 MPE_dir.pr<-array(t(MPE_dir.p),dim=c(5,3,2),dimnames = list(MPE_dir=MPE_dir, Mining_intensity=MI,Mined=Mined)) 
 
-MPE_indir.p<-read.csv("CPTs/Final CPTs/MPE_indir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+MPE_indir.p<-read.csv("CPTs/MPE_indir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 MPE_indir.p<-as.matrix(MPE_indir.p[,4:8])
 colnames(MPE_indir.p) <- NULL
 MPE_indir.pr<-array(t(MPE_indir.p),dim=c(5,2,3,3),dimnames = list(MPE_indir=MPE_indir, Contaminant_release=CRel,Sediment_deposition=SDep, Suspended_sediment=SS)) 
 
-MPE_t2.p<-read.csv("CPTs/Final CPTs/TotalMortality.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+MPE_t2.p<-read.csv("CPTs/TotalMortality.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 MPE_t2.p<-as.matrix(MPE_t2.p[,3:7])
 colnames(MPE_t2.p) <- NULL
 MPE_t2.pr<-array(t(MPE_t2.p),dim=c(5,5,5),dimnames = list(MPE_t2=MPE_indir, MPE_dir=MPE_dir, MPE_indir=MPE_indir))
 
-MPE_t3.p<-read.csv("CPTs/Final CPTs/MPE_t3.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+MPE_t3.p<-read.csv("CPTs/MPE_t3.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 MPE_t3.p<-as.matrix(MPE_t3.p[,3:7])
 colnames(MPE_t3.p) <- NULL
 MPE_t3.pr<-array(t(MPE_t3.p),dim=c(5,2,5),dimnames = list(MPE_t3=MPE_t3, Sediment_changes=SChan, MPE_t2=MPE_t2))
 
 # Mobile grazing epifauna
 
-MGE_dir.p<-read.csv("CPTs/Final CPTs/GH_dir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+MGE_dir.p<-read.csv("CPTs/GH_dir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 MGE_dir.p<-as.matrix(MGE_dir.p[,3:7])
 colnames(MGE_dir.p) <- NULL
 MGE_dir.pr<-array(t(MGE_dir.p),dim=c(5,3,2),dimnames = list(MGE_dir=MGE_dir, Mining_intensity=MI,Mined=Mined)) 
 
-MGE_indir.p<-read.csv("CPTs/Final CPTs/MGE_indir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+MGE_indir.p<-read.csv("CPTs/MGE_indir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 MGE_indir.p<-as.matrix(MGE_indir.p[,4:8])
 colnames(MGE_indir.p) <- NULL
 MGE_indir.pr<-array(t(MGE_indir.p),dim=c(5,2,3,3),dimnames = list(MGE_indir=MGE_indir, Contaminant_release=CRel,Sediment_deposition=SDep, Suspended_sediment=SS)) 
 
-MGE_t2.p<-read.csv("CPTs/Final CPTs/TotalMortality.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+MGE_t2.p<-read.csv("CPTs/TotalMortality.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 MGE_t2.p<-as.matrix(MGE_t2.p[,3:7])
 colnames(MGE_t2.p) <- NULL
 MGE_t2.pr<-array(t(MGE_t2.p),dim=c(5,5,5),dimnames = list(MGE_t2=MGE_indir, MGE_dir=MGE_dir, MGE_indir=MGE_indir))
 
-MGE_t3.p<-read.csv("CPTs/Final CPTs/MGE_t3.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+MGE_t3.p<-read.csv("CPTs/MGE_t3.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 MGE_t3.p<-as.matrix(MGE_t3.p[,3:7])
 colnames(MGE_t3.p) <- NULL
 MGE_t3.pr<-array(t(MGE_t3.p),dim=c(5,2,5),dimnames = list(MGE_t3=MGE_t3, Sediment_changes=SChan, MGE_t2=MGE_t2))
 
 # Grazing hyperbenthos
 
-GH_dir.p<-read.csv("CPTs/Final CPTs/GH_dir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+GH_dir.p<-read.csv("CPTs/GH_dir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 GH_dir.p<-as.matrix(GH_dir.p[,3:7])
 colnames(GH_dir.p) <- NULL
 GH_dir.pr<-array(t(GH_dir.p),dim=c(5,3,2),dimnames = list(GH_dir=GH_dir, Mining_intensity=MI,Mined=Mined)) 
 
-GH_indir.p<-read.csv("CPTs/Final CPTs/GH_indir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+GH_indir.p<-read.csv("CPTs/GH_indir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 GH_indir.p<-as.matrix(GH_indir.p[,4:8])
 colnames(GH_indir.p) <- NULL
 GH_indir.pr<-array(t(GH_indir.p),dim=c(5,2,3,3),dimnames = list(GH_indir=GH_indir, Contaminant_release=CRel,Sediment_deposition=SDep, Suspended_sediment=SS)) 
 
-GH_t2.p<-read.csv("CPTs/Final CPTs/TotalMortality.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+GH_t2.p<-read.csv("CPTs/TotalMortality.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 GH_t2.p<-as.matrix(GH_t2.p[,3:7])
 colnames(GH_t2.p) <- NULL
 GH_t2.pr<-array(t(GH_t2.p),dim=c(5,5,5),dimnames = list(GH_t2=GH_indir, GH_dir=GH_dir, GH_indir=GH_indir))
 
-GH_t3.p<-read.csv("CPTs/Final CPTs/GH_t3.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+GH_t3.p<-read.csv("CPTs/GH_t3.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 GH_t3.p<-as.matrix(GH_t3.p[,3:7])
 colnames(GH_t3.p) <- NULL
 GH_t3.pr<-array(t(GH_t3.p),dim=c(5,2,5),dimnames = list(GH_t3=GH_t3, Sediment_changes=SChan, GH_t2=GH_t2))
 
 # Preadatory hyperbenthos
 
-PH_dir.p<-read.csv("CPTs/Final CPTs/PH_dir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+PH_dir.p<-read.csv("CPTs/PH_dir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 PH_dir.p<-as.matrix(PH_dir.p[,3:7])
 colnames(PH_dir.p) <- NULL
 PH_dir.pr<-array(t(PH_dir.p),dim=c(5,3,2),dimnames = list(PH_dir=PH_dir, Mining_intensity=MI,Mined=Mined)) 
 
-PH_indir.p<-read.csv("CPTs/Final CPTs/PH_indir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+PH_indir.p<-read.csv("CPTs/PH_indir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 PH_indir.p<-as.matrix(PH_indir.p[,4:8])
 colnames(PH_indir.p) <- NULL
 PH_indir.pr<-array(t(PH_indir.p),dim=c(5,2,3,3),dimnames = list(PH_indir=PH_indir, Contaminant_release=CRel,Sediment_deposition=SDep, Suspended_sediment=SS)) 
 
-PH_t2.p<-read.csv("CPTs/Final CPTs/TotalMortality.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+PH_t2.p<-read.csv("CPTs/TotalMortality.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 PH_t2.p<-as.matrix(PH_t2.p[,3:7])
 colnames(PH_t2.p) <- NULL
 PH_t2.pr<-array(t(PH_t2.p),dim=c(5,5,5),dimnames = list(PH_t2=PH_indir, PH_dir=PH_dir, PH_indir=PH_indir))
 
-PH_t3.p<-read.csv("CPTs/Final CPTs/PH_t3.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+PH_t3.p<-read.csv("CPTs/PH_t3.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 PH_t3.p<-as.matrix(PH_t3.p[,3:7])
 colnames(PH_t3.p) <- NULL
 PH_t3.pr<-array(t(PH_t3.p),dim=c(5,2,5),dimnames = list(PH_t3=PH_t3, Sediment_changes=SChan, PH_t2=PH_t2))
 
 # Sessile erect suspension feeders
 
-SESF_dir.p<-read.csv("CPTs/Final CPTs/SESF_dir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+SESF_dir.p<-read.csv("CPTs/SESF_dir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 SESF_dir.p<-as.matrix(SESF_dir.p[,3:7])
 colnames(SESF_dir.p) <- NULL
 SESF_dir.pr<-array(t(SESF_dir.p),dim=c(5,3,2),dimnames = list(SESF_dir=SESF_dir, Mining_intensity=MI,Mined=Mined)) 
 
-SESF_indir.p<-read.csv("CPTs/Final CPTs/SESF_indir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+SESF_indir.p<-read.csv("CPTs/SESF_indir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 SESF_indir.p<-as.matrix(SESF_indir.p[,4:8])
 colnames(SESF_indir.p) <- NULL
 SESF_indir.pr<-array(t(SESF_indir.p),dim=c(5,2,3,3),dimnames = list(SESF_indir=SESF_indir, Contaminant_release=CRel,Sediment_deposition=SDep, Suspended_sediment=SS)) 
 
-SESF_t2.p<-read.csv("CPTs/Final CPTs/TotalMortality.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+SESF_t2.p<-read.csv("CPTs/TotalMortality.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 SESF_t2.p<-as.matrix(SESF_t2.p[,3:7])
 colnames(SESF_t2.p) <- NULL
 SESF_t2.pr<-array(t(SESF_t2.p),dim=c(5,5,5),dimnames = list(SESF_t2=SESF_indir, SESF_dir=SESF_dir, SESF_indir=SESF_indir))
 
-SESF_t3.p<-read.csv("CPTs/Final CPTs/SESF_t3.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+SESF_t3.p<-read.csv("CPTs/SESF_t3.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 SESF_t3.p<-as.matrix(SESF_t3.p[,3:7])
 colnames(SESF_t3.p) <- NULL
 SESF_t3.pr<-array(t(SESF_t3.p),dim=c(5,2,5),dimnames = list(SESF_t3=SESF_t3, Sediment_changes=SChan, SESF_t2=SESF_t2))
 
 # Sessile encrusting suspension feeders
 
-SCSF_dir.p<-read.csv("CPTs/Final CPTs/SESF_dir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+SCSF_dir.p<-read.csv("CPTs/SESF_dir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 SCSF_dir.p<-as.matrix(SCSF_dir.p[,3:7])
 colnames(SCSF_dir.p) <- NULL
 SCSF_dir.pr<-array(t(SCSF_dir.p),dim=c(5,3,2),dimnames = list(SCSF_dir=SCSF_dir, Mining_intensity=MI,Mined=Mined)) 
 
-SCSF_indir.p<-read.csv("CPTs/Final CPTs/SCSF_indir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+SCSF_indir.p<-read.csv("CPTs/SCSF_indir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 SCSF_indir.p<-as.matrix(SCSF_indir.p[,4:8])
 colnames(SCSF_indir.p) <- NULL
 SCSF_indir.pr<-array(t(SCSF_indir.p),dim=c(5,2,3,3),dimnames = list(SCSF_indir=SCSF_indir, Contaminant_release=CRel,Sediment_deposition=SDep, Suspended_sediment=SS)) 
 
-SCSF_t2.p<-read.csv("CPTs/Final CPTs/TotalMortality.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+SCSF_t2.p<-read.csv("CPTs/TotalMortality.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 SCSF_t2.p<-as.matrix(SCSF_t2.p[,3:7])
 colnames(SCSF_t2.p) <- NULL
 SCSF_t2.pr<-array(t(SCSF_t2.p),dim=c(5,5,5),dimnames = list(SCSF_t2=SCSF_indir, SCSF_dir=SCSF_dir, SCSF_indir=SCSF_indir))
 
-SCSF_t3.p<-read.csv("CPTs/Final CPTs/SCSF_t3.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+SCSF_t3.p<-read.csv("CPTs/SCSF_t3.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 SCSF_t3.p<-as.matrix(SCSF_t3.p[,3:7])
 colnames(SCSF_t3.p) <- NULL
 SCSF_t3.pr<-array(t(SCSF_t3.p),dim=c(5,2,5),dimnames = list(SCSF_t3=SCSF_t3, Sediment_changes=SChan, SCSF_t2=SCSF_t2))
 
 # Sessile erect filter feeders
 
-SEFF_dir.p<-read.csv("CPTs/Final CPTs/SESF_dir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+SEFF_dir.p<-read.csv("CPTs/SESF_dir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 SEFF_dir.p<-as.matrix(SEFF_dir.p[,3:7])
 colnames(SEFF_dir.p) <- NULL
 SEFF_dir.pr<-array(t(SEFF_dir.p),dim=c(5,3,2),dimnames = list(SEFF_dir=SEFF_dir, Mining_intensity=MI,Mined=Mined)) 
 
-SEFF_indir.p<-read.csv("CPTs/Final CPTs/SEFF_indir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+SEFF_indir.p<-read.csv("CPTs/SEFF_indir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 SEFF_indir.p<-as.matrix(SEFF_indir.p[,4:8])
 colnames(SEFF_indir.p) <- NULL
 SEFF_indir.pr<-array(t(SEFF_indir.p),dim=c(5,2,3,3),dimnames = list(SEFF_indir=SEFF_indir, Contaminant_release=CRel,Sediment_deposition=SDep, Suspended_sediment=SS)) 
 
-SEFF_t2.p<-read.csv("CPTs/Final CPTs/TotalMortality.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+SEFF_t2.p<-read.csv("CPTs/TotalMortality.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 SEFF_t2.p<-as.matrix(SEFF_t2.p[,3:7])
 colnames(SEFF_t2.p) <- NULL
 SEFF_t2.pr<-array(t(SEFF_t2.p),dim=c(5,5,5),dimnames = list(SEFF_t2=SEFF_indir, SEFF_dir=SEFF_dir, SEFF_indir=SEFF_indir))
 
-SEFF_t3.p<-read.csv("CPTs/Final CPTs/SEFF_t3.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+SEFF_t3.p<-read.csv("CPTs/SEFF_t3.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 SEFF_t3.p<-as.matrix(SEFF_t3.p[,3:7])
 colnames(SEFF_t3.p) <- NULL
 SEFF_t3.pr<-array(t(SEFF_t3.p),dim=c(5,2,5),dimnames = list(SEFF_t3=SEFF_t3, Sediment_changes=SChan, SEFF_t2=SEFF_t2))
 
 # Sessile encrusting filter feeders
 
-SCFF_dir.p<-read.csv("CPTs/Final CPTs/SESF_dir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+SCFF_dir.p<-read.csv("CPTs/SESF_dir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 SCFF_dir.p<-as.matrix(SCFF_dir.p[,3:7])
 colnames(SCFF_dir.p) <- NULL
 SCFF_dir.pr<-array(t(SCFF_dir.p),dim=c(5,3,2),dimnames = list(SCFF_dir=SCFF_dir, Mining_intensity=MI,Mined=Mined)) 
 
-SCFF_indir.p<-read.csv("CPTs/Final CPTs/SCFF_indir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+SCFF_indir.p<-read.csv("CPTs/SCFF_indir.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 SCFF_indir.p<-as.matrix(SCFF_indir.p[,4:8])
 colnames(SCFF_indir.p) <- NULL
 SCFF_indir.pr<-array(t(SCFF_indir.p),dim=c(5,2,3,3),dimnames = list(SCFF_indir=SCFF_indir, Contaminant_release=CRel,Sediment_deposition=SDep, Suspended_sediment=SS)) 
 
-SCFF_t2.p<-read.csv("CPTs/Final CPTs/TotalMortality.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+SCFF_t2.p<-read.csv("CPTs/TotalMortality.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 SCFF_t2.p<-as.matrix(SCFF_t2.p[,3:7])
 colnames(SCFF_t2.p) <- NULL
 SCFF_t2.pr<-array(t(SCFF_t2.p),dim=c(5,5,5),dimnames = list(SCFF_t2=SCFF_indir, SCFF_dir=SCFF_dir, SCFF_indir=SCFF_indir))
 
-SCFF_t3.p<-read.csv("CPTs/Final CPTs/SCFF_t3.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+SCFF_t3.p<-read.csv("CPTs/SCFF_t3.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 SCFF_t3.p<-as.matrix(SCFF_t3.p[,3:7])
 colnames(SCFF_t3.p) <- NULL
 SCFF_t3.pr<-array(t(SCFF_t3.p),dim=c(5,2,5),dimnames = list(SCFF_t3=SCFF_t3, Sediment_changes=SChan, SCFF_t2=SCFF_t2))
