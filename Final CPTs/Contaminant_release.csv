@@ -1,0 +1,82 @@
+Distance_mining_site,Sediment_type,Volume_extraction,Sediment_contaminants,Low,Significant
+Inside block,Fine,Low,Low,1,0
+Inside block,Fine,Low,Moderate,0.95,0.05
+Inside block,Fine,Low,High,0.8,0.2
+Inside block,Fine,Moderate,Low,1,0
+Inside block,Fine,Moderate,Moderate,0.9,0.1
+Inside block,Fine,Moderate,High,0.4,0.6
+Inside block,Fine,High,Low,1,0
+Inside block,Fine,High,Moderate,0.7,0.3
+Inside block,Fine,High,High,0.2,0.8
+Inside block,Fine-coarse mix,Low,Low,1,0
+Inside block,Fine-coarse mix,Low,Moderate,0.97,0.03
+Inside block,Fine-coarse mix,Low,High,0.9,0.1
+Inside block,Fine-coarse mix,Moderate,Low,1,0
+Inside block,Fine-coarse mix,Moderate,Moderate,0.95,0.05
+Inside block,Fine-coarse mix,Moderate,High,0.45,0.55
+Inside block,Fine-coarse mix,High,Low,1,0
+Inside block,Fine-coarse mix,High,Moderate,0.8,0.2
+Inside block,Fine-coarse mix,High,High,0.3,0.7
+Inside block,Coarse,Low,Low,1,0
+Inside block,Coarse,Low,Moderate,0.99,0.01
+Inside block,Coarse,Low,High,0.95,0.05
+Inside block,Coarse,Moderate,Low,1,0
+Inside block,Coarse,Moderate,Moderate,0.95,0.05
+Inside block,Coarse,Moderate,High,0.8,0.2
+Inside block,Coarse,High,Low,1,0
+Inside block,Coarse,High,Moderate,0.9,0.1
+Inside block,Coarse,High,High,0.7,0.3
+Nearfield,Fine,Low,Low,1,0
+Nearfield,Fine,Low,Moderate,0.965,0.035
+Nearfield,Fine,Low,High,0.86,0.14
+Nearfield,Fine,Moderate,Low,1,0
+Nearfield,Fine,Moderate,Moderate,0.93,0.07
+Nearfield,Fine,Moderate,High,0.58,0.42
+Nearfield,Fine,High,Low,1,0
+Nearfield,Fine,High,Moderate,0.79,0.21
+Nearfield,Fine,High,High,0.44,0.56
+Nearfield,Fine-coarse mix,Low,Low,1,0
+Nearfield,Fine-coarse mix,Low,Moderate,0.979,0.021
+Nearfield,Fine-coarse mix,Low,High,0.93,0.07
+Nearfield,Fine-coarse mix,Moderate,Low,1,0
+Nearfield,Fine-coarse mix,Moderate,Moderate,0.965,0.035
+Nearfield,Fine-coarse mix,Moderate,High,0.615,0.385
+Nearfield,Fine-coarse mix,High,Low,1,0
+Nearfield,Fine-coarse mix,High,Moderate,0.86,0.14
+Nearfield,Fine-coarse mix,High,High,0.51,0.49
+Nearfield,Coarse,Low,Low,1,0
+Nearfield,Coarse,Low,Moderate,0.993,0.007
+Nearfield,Coarse,Low,High,0.965,0.035
+Nearfield,Coarse,Moderate,Low,1,0
+Nearfield,Coarse,Moderate,Moderate,0.965,0.035
+Nearfield,Coarse,Moderate,High,0.86,0.14
+Nearfield,Coarse,High,Low,1,0
+Nearfield,Coarse,High,Moderate,0.93,0.07
+Nearfield,Coarse,High,High,0.79,0.21
+Outside block,Fine,Low,Low,1,0
+Outside block,Fine,Low,Moderate,0.99,0.01
+Outside block,Fine,Low,High,0.985,0.015
+Outside block,Fine,Moderate,Low,1,0
+Outside block,Fine,Moderate,Moderate,0.99,0.01
+Outside block,Fine,Moderate,High,0.98,0.02
+Outside block,Fine,High,Low,1,0
+Outside block,Fine,High,Moderate,0.97,0.03
+Outside block,Fine,High,High,0.95,0.05
+Outside block,Fine-coarse mix,Low,Low,1,0
+Outside block,Fine-coarse mix,Low,Moderate,0.995,0.005
+Outside block,Fine-coarse mix,Low,High,0.99,0.01
+Outside block,Fine-coarse mix,Moderate,Low,1,0
+Outside block,Fine-coarse mix,Moderate,Moderate,0.99,0.01
+Outside block,Fine-coarse mix,Moderate,High,0.985,0.015
+Outside block,Fine-coarse mix,High,Low,1,0
+Outside block,Fine-coarse mix,High,Moderate,0.99,0.01
+Outside block,Fine-coarse mix,High,High,0.98,0.02
+Outside block,Coarse,Low,Low,1,0
+Outside block,Coarse,Low,Moderate,1,0
+Outside block,Coarse,Low,High,1,0
+Outside block,Coarse,Moderate,Low,1,0
+Outside block,Coarse,Moderate,Moderate,1,0
+Outside block,Coarse,Moderate,High,0.995,0.005
+Outside block,Coarse,High,Low,1,0
+Outside block,Coarse,High,Moderate,1,0
+Outside block,Coarse,High,High,0.99,0.01
