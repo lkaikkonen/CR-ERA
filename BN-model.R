@@ -38,14 +38,14 @@ ipak(packages)
 # DEFINING THE BN STRUCTURE 
 
 # Read network nodes and connection
-nodes_t<-read.table("Model-Structure/Node_CR-ERA.csv", header=FALSE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
+nodes_t<-read.table("Model structure/Node_CR-ERA.csv", header=FALSE,fill=TRUE, sep=',', stringsAsFactors = FALSE)
 nodes2<-as.matrix(nodes_t[,1])
 states<-nodes_t[,2:6]
 colnames(states)<-NULL
 
 # Import network connections as matrix
 
-data2<- read.table("Model-Structure/Edge_CR-ERA.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE) #read edges
+data2<- read.table("Model structure/Edge_CR-ERA.csv", header=TRUE,fill=TRUE, sep=',', stringsAsFactors = FALSE) #read edges
 arc.set =as.matrix(data2)
 dagCR<-empty.graph(nodes2) # create empty DAG with nodes in the data
 arcs(dagCR) = arc.set # create DAG
